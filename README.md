@@ -41,11 +41,10 @@ PS1='[\d]\u@\h:\w$'
 ### Linux Kernel
 - The kernel is the interface between applciations/processes and the underlying h/w - CPU, Memory, Storage, I/O.  The kernel manages and schedules resources
 - Kernel is responsible for 4 major tasks
--   Memory Mangement
--   Process managment - when can process
--   Device Drivers
--   Systems Calls and security
--     resuqest
+  - Memory Mangement
+  - Process managment - when can process
+  - Device Drivers
+  - Systems Calls and security
 - Kernel is monolithic
 - Kernel is modular - can extend its capability by loading dynamic extenxsions
 
