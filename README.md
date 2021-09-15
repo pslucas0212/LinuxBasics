@@ -91,9 +91,9 @@ lshw - hardware output
 
 #### sudo
 - run command as root - with sudo you can determine which commands a user can run as super user and also see a list of commands the user has run as root
-```
+````
 $ sudo lshw
-```
+````
 
 ## Linux Boot Sequence
 - Four stages
