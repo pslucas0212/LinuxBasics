@@ -160,8 +160,8 @@ Identify file type
 $ file /home/dir
 $ file bob.sock
 ````
-or use list command
-````
+or use list - ls command to identify file type by the output
+```
 ls -ld /home/michael
 ```
 Identified by first letter d - directory, s - socket, b - block device, l link, p - pip - - regular file
