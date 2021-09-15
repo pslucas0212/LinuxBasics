@@ -28,7 +28,7 @@ $ sudo chsh -s /binsh <username>
 ```
 - Show path
 ```
-echo $PATH
+$ echo $PATH
 ```
 - Create alias
 ```
@@ -36,7 +36,7 @@ $ alias up=uptime
 ```
 - Change prompt example - Add date between brackets, then username @ hostname working directory : $ -> [Wed Sep 15]bob@caleston-lp10:~$
 ```
-PS1='[\d]\u@\h:\w$'
+$ PS1='[\d]\u@\h:\w$'
 ```
 ### Linux Kernel
 - The kernel is the interface between applciations/processes and the underlying h/w - CPU, Memory, Storage, I/O.  The kernel manages and schedules resources
@@ -186,3 +186,80 @@ Use this command to see mounted devices
 ```
 $ df -hP
 ```
+## Linux Package Management
+Debian/Ubuntu
+- DPKG/APT
+Redhat/Fedora
+- RPM
+
+.deb -> debian package manager
+.rpm -> Red Hat package manager
+
+Package - a compressed archive that is a set code packages (binaries, files and meta-data) to run software (or an application)
+
+Manifest of a package describe the list of dependencies and minimal versions of supporting package/softare that is required to install softare
+
+Package manage
+- insure integreity and authenticy of the padkage
+- Simplfy package management - installation, cofnfiguration
+- Group packages
+- 
+
+Types of package manageer
+- DPKG - debian
+- APT - new version that frontends DPAK
+- APT-GET
+- RPM - Red Hat
+- Yum - front end for RPM
+- DNF - new front end for RPM
+
+#### RPM and YUM
+
+RPM - Red Hat Package Manager
+- CentOS, Fedora, Redhat
+- .rpm 
+
+RPM has five modes
+- installation - $ rpm -ivh telnet.rpm
+- uninstalling - $ rpm -e telnet.rpm
+- upgrade - $ rpm -Uvh telnet.rpm 
+- query - $ fpm -q telnet.rpm
+- verify - $ rpm -VF
+
+YUM - YellowDog Update Manager
+- Works on RPM base distors
+- software repository
+- high level package manager - uses RPM under the covers
+- Automaticatlly resolves dependencies - which RPM does not
+
+Repoistory information is stored under /etc/yum.repos.d
+For Red Hat -> /etc/yum.repos.d/redhat.repo
+You may need to create your on repo file /etc/yum.repos.d/nginx.rpm
+
+YUM install example
+```
+$ yum install httpd
+$ yum -y install httpd
+```
+After checking repository for all code and packages, Yum displays a transcation log.  
+
+```
+$ yum repolist
+```
+To find where a particular app is located
+```
+$ yum provides scp
+```
+To remove package run:
+```
+$ yum remove httpd
+```
+To update a package
+```
+$ yum update telnet
+```
+Update all packages
+```
+$ yum update
+```
+
