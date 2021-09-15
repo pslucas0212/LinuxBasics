@@ -57,23 +57,25 @@ $ uname
 ```
 $ uname -r
 ```
-- kernel.org to get more kernel information
+- See the kernel.org webssite to get more information on the Linux kernel
 
 #### Kernel and User Space
 - memory is divided into two spaces: Kernel space and user space
-- - Kernel space unrestricted access to hardware and runs the Kernel code, kernel extensions and device drivers
-- - user space - all process running outside kernel space which restricts access to h/w
-- - user space applications - user space also called user land
-- - examples: programs written in Java, C, Python
+  - Kernel space unrestricted access to hardware and runs the Kernel code, kernel extensions and device drivers
+  - User space - all process running outside kernel space which restricts access to h/w
+    - user space applications - user space also called user land
+    - examples: programs written in Java, C, Python
 
 - Data for users stored in memory or disk.  Applications in the user space access data by making system calls to the kernel space, which in turn makes calls to device drivers to the underlying physical hardware
 
-- example 
-- - sytem calls open(), close()
+
+- system calls include open(), close()
 
 #### Working Hardware
-- dmesg - 
+- dmesg
+```
 $ dmesg | grep -i usb
+```
 
 udevadm info --query=path --name=dev/
 
@@ -91,16 +93,16 @@ lshw - hardware output
 
 #### sudo
 - run command as root - with sudo you can determine which commands a user can run as super user and also see a list of commands the user has run as root
-````
+```
 $ sudo lshw
-````
+```
 
 ## Linux Boot Sequence
 - Four stages
--   BIOS Post
--   Boot Loader - GRUB2
--   Kernel Initialization
--   INIT process (systemd)
+  -   BIOS Post
+  -   Boot Loader - GRUB2
+  -   Kernel Initialization
+  -   INIT process (systemd)
 
 Start a linux device in stopped or halted state or reboot running system
 
@@ -108,14 +110,14 @@ BIOS POST - power on self test - make sure all the h/w can start
 BIOS loads boot code - located in first segment of harddrive - loadks kernel
 - Grand Unified Boot Load (GRUB 2)
 - Kernel is decompressed after loading - the kernel is loaded into memory
--   After kernel is loaded it looks for an init process to setup user space
+  -   After kernel is loaded it looks for an init process to setup user space
 - INIT process starts systemd
--   systemd start systems and mounts drives, etc.
+  -   systemd start services, mounts drives, etc.
 
 To see what init process is using run:
-````
+```
 $ ls -l /sbin/init
-````
+```
 
 ### Run Levels
 Linux can run in multiple modes set by the run level.  Type the following to see the level
@@ -142,16 +144,16 @@ $ sudo systemctl set-default multi-user.target
 ```
 
 ### File types
-"Everything is a file in Linux" - every object in linux is a "type of file
+"Everything is a file in Linux" - every object in linux is a "type" of file
 Three types of files
 - regular files - images, scripts, configuration, shell scripts, jpeg
 - directory - stores other directories and files
 - special files
--   character files - device
--   Block files - under /dev - block device reads from and writes to a device in chunks of block either memory or hard disk
--  Links: Hard links and symbolic links - hard link + sys
--  Socket - communication between to files
--  Named pipes - send information bi-directionally between process
+  -   character files - device
+  -   Block files - under /dev - block device reads from and writes to a device in chunks of block either memory or hard disk
+  -  Links: Hard links and symbolic links
+  -  Sockets - communication between to files
+  -  Named pipes - send information bi-directionally between process
 
 
 Identify file type
@@ -182,6 +184,6 @@ Identified by first letter d - directory, s - socket, b - block device, l link, 
 /var - system rights logs and cached data to var
 
 Use this command to see mounted devices
-````
+```
 $ df -hP
-````
+```
