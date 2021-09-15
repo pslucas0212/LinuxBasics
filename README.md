@@ -341,6 +341,8 @@ Debian Package Manager - DPKG - low lever package manager like RPM
   - gzip
   - xz
   
+ - unzip with gunzip for gzip
+  
  - zcat,bzcat,xcat - reads file without uncompressing the file
   
   #### Searching for files and directories
@@ -371,6 +373,10 @@ Debian Package Manager - DPKG - low lever package manager like RPM
   Search recursively
   ```
   $ grep -r "third line" capital.txt
+  ```
+  Search for a string through set of files in a directory
+  ```
+  $ grep -ir 172.16.123.197 /etc
   ```
   Find only whole words
   ```
@@ -422,11 +428,12 @@ Pipes output to less command
 Tee command - standard output printed to screen before overwriting file
 ```
   $ echo $SHELL | tee shell.txt
-'''
+```
 Use -a to append to file
 ```
 $ echo $SHELL | tee -a shell.txt
 ```
   
+#### VI editor
   
   
