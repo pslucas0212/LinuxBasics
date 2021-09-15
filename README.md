@@ -119,9 +119,9 @@ $ ls -l /sbin/init
 
 ### Run Levels
 Linux can run in multiple modes set by the run level.  Type the following to see the level
-````
+```
 $ runlevel
-````
+```
 Run levels include:
 - graphical
 - command line
@@ -131,15 +131,15 @@ During boot the system checks the runlevel
 in systemd runlevel are called systemd targets
 
 To see systemd target type:
-````
+```
 $ systemctl get-default
 $ ls -ltr /etc/systemd/system/default.target
 ```
 
 Change systemd target:
-````
-$ systemctl set-default mutli-user.target
-````
+```
+$ sudo systemctl set-default multi-user.target
+```
 
 ### File types
 "Everything is a file in Linux" - every object in linux is a "type of file
