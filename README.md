@@ -263,3 +263,170 @@ Update all packages
 $ yum update
 ```
 
+#### DPKG and APT
+
+Debian distros PureOS, Ubuntu
+Debian Package Manager - DPKG - low lever package manager like RPM
+
+- Installation/upgrade  - $ dpkg -i telnet.deb
+- uninstalling -  $ dpkg -r telnet.deb
+- List -  $ dpkg -l telnet
+- Status - $ dpkg -s telnet
+- Verifying -  $ dpkg -p <path to file>
+  
+ DPKG does not support depencies and we use APT and APT-GET
+ 
+  APT - Advanced Pagkacge Manager
+  
+  APT - acts as a front end manager depending on DPKG and software repositories.  Repos list are found in /etc/apt/sources.list
+  
+  APT commands
+  Refresh repo
+  ```
+  $ apt update
+  ```
+  Upgrade
+  ```
+  $ apt udpate
+  ```
+  Add repos
+  ```
+  $ apt edit-sources
+  ```
+  Install package
+  ```
+  $ apt install telnet
+  ```
+  Uninstall package
+  ```
+  $ apt remove telnet
+  ```
+  List 
+  ```
+  $ apt search telent
+  ```
+  
+  #### APT vs APT-GET
+  APT is more user frienldy then apt-get
+  
+  Installation output is easier to read
+  
+  Eassier to search
+  ```
+  $ apt search telnet
+  ```
+  ## File Compression and Archival
+  
+  Viewing File sizes
+  Disk usage command
+  ```
+  $ du -sk test.img
+  $ du -sh test.img
+  $ du
+  ```
+  Archiving Files
+  - tar cf 
+  - tar stands for Tape Archive
+  - archived files are call tar balls
+  To 'tar' up a file
+  ```
+  $ tar -cf test.tar file1 file2 file3
+  ```
+  - -tf see contents of tar files
+  - -xf to extract tarfile
+  - -cfz - to compress archive file
+  
+  Compression options
+  - bzip2
+  - gzip
+  - xz
+  
+ - zcat,bzcat,xcat - reads file without uncompressing the file
+  
+  #### Searching for files and directories
+  Locating file or directory
+  
+  Find files with <city>.txt
+  ```
+  $ locate City.txt
+  ```
+  This command may not "work" if the database hasn't been update. Update database
+  
+ ``` 
+  $ sudo updatedb
+  ```
+  Alternativel use the find command with -name for name of file
+  ```
+  $ find /home/michael -name City.txt
+  ```
+  Search with in file use GREP. case sensitive
+  - search for word second
+  ```
+  $ grep second sample.txt
+  ```
+  Case insentive
+  ```
+  $ grep -i capitl sample.text
+  ```
+  Search recursively
+  ```
+  $ grep -r "third line" capital.txt
+  ```
+  Find only whole words
+  ```
+  $ grep -w exam examples.text
+  ```
+  Skipe lines with the search word
+  ```
+  $ grep -v examp examples.text
+  ```
+  To print line berfore or after finding the pattern
+ ```
+  $ grep -A1 arsenal premier.txt
+  $ grep -B1 arsenal premier.txt
+  $ grep -AB1 aresenal premier.txt
+  ```
+  
+  #### IO Redirection
+  Three data streams created when you launch a linux command
+  - Standard Input - stdin - accepts input - $ cat sample.txt
+  - Standard ouput - stdout
+  - standard Error - stderr - redirect to file
+  
+  Redirect stdout
+  ``` 
+  $ echo $SHELL > shell.txt
+  ```
+  Append stdout to a file
+  ```
+  $ echo "some text" >> shell.txt
+  ```
+  
+Redirect STDERR
+```
+ $ dat missing_file 2> error.txt
+ $ cat missing_file 2>> error.txt
+ ```
+  Dump stderr
+```
+$ cat missing_file > nul
+ ```
+  
+#### Command Line Pipes
+Use standard out of one command as the standard in for another command
+```
+$ grep hello sample.txt | less
+```
+Pipes output to less command
+ 
+Tee command - standard output printed to screen before overwriting file
+```
+  $ echo $SHELL | tee shell.txt
+'''
+Use -a to append to file
+```
+$ echo $SHELL | tee -a shell.txt
+```
+  
+  
+  
