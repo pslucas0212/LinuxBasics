@@ -643,10 +643,49 @@ Numeric mode example
  $ chmod 660 test-file
  $ chmod 750 test-file
 ```
+  
 
 Change ownership and group  - chown owner:group file
 ```
 $ chown bob:developer test-file
 $ chown bob andoid.pak
 $ chgrp androd. test-file
+```  
+  
+#### SSH and SCP  
+SSH for logging into and executing commands on a remote computer  
+ssh <hostname  or ip adderss>  
+ssh <user@hostname>  
+ssh -l <user> <hostname>
 ```
+$ ssh devapp01
+```
+This uses the id that you are logged on locally to acess the remote server  
+ 
+You can enable the passwordlesss login with keys - public and private key  
+Setting up password-less SSH example:  
+1. Create key-pair
+```
+$ ssh-keygen -i rsa
+```
+Notice where the keys are stored:  
+Public key - /home/bob/.ssh/id_rsa.pub  
+Private key - /home/bob/.ssh/id_rsa
+
+2. Copy remote key to target remote server  
+```  
+$ ssh-copy-id bob@devapp01
+```
+The public key is now stored on the remote server here:  
+/home/bob/.ssh/authorized_keys  
+  
+#### SCP  
+SCP - secure copy for use with remote servers using TSL/SSL
+```
+$ scp /home/bob/caleston-code.tar.gz devapp01:/home/bob
+```
+Copy directory and preserve permissions example
+```
+$ scp -pr /home/bob/media /devapp01:/home/bob
+```
+
