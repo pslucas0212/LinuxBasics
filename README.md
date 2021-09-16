@@ -545,3 +545,37 @@ Delete group
 ```
 $ groupdel developer
 ```
+#### Access Control Files
+These files are found under /etc directory, are only accessible to root, and should never be modified directly with vi or VIM, but with their "special" editor.  
+
+- /etc/passwd - contains information about users including user name, id, groups, home directory and shell
+```
+$ grep -i bob /etc/passwd
+```
+- /etc/shadow - containers users password that is hashed
+- /etc/groups - contains groups
+  
+/etc/passwd contains user information  
+```
+$ grep -i pslucas /etc/passwd
+```
+USERNAME:PASSWORD:UID:GID:GECOS:HOMEDIR:SHELL  
+pslucas:x:1000:1000::/home/pslucas:/bin/bash  
+Password is always x as the password is kept in the /etc/shadow file.  The GECOS CSV comma separated other information include full name, phone number and location information is optional  
+  
+/etc/shadow
+```
+$ grep -i pslucas /etc/passwd 
+```
+USERNAME:PASSWORD:LASTCHANGE:MINAGE:MAXAGE:WARN:INACTIVE:EXPDATE
+username, hashed password, the rest self explanatory - Note: LASTCHANGE the date since the password last changed is Epic.  Minimum and max days before they need to change password,  number of days to warn the user before the password expiration.  EXPDAT - nunmber of days when the account expires in an epic date format   
+  
+/etc/group
+```
+$ grep -i pslucas /etc/group
+```
+NAME:PASSWORD:GID:MEMBERS
+Group name, password set to x saved in the shadow file, Group ID, memeber list comma separated
+ 
+
+
