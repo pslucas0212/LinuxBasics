@@ -611,7 +611,7 @@ Bit | Purpose | Octal Value
  r | Read | 4
  w | Write | 2
  x | Execute | 1
-- | No Permission | 0  
+'-' | No Permission | 0  
   
 Directory permission heirachy  
 Permissions first check owner if owner then only owner permissions applied  
@@ -624,5 +624,29 @@ Example 1 | Example 2 | Example 3 | Example 4
 --------- | --------- | --------- | ---------
 rwx | rw- | -wx | r-x
 4+2+1 | 4+2+0 | 0+2+1 | 4+0+1
-7 | 6 | 3 | 5
+7 | 6 | 3 | 5  
+  
+Changing file permissions  
+chmod <permissions> file  
+Change numerically or symbollically  
+Symbolic mode example
+ ```
+ $ chmod u+rwx test-file
+ $ chmod ugo+r test-file
+ $ chmod o-rwx test-file
+ $ chmod u+rwx,g+r-x,o-rwx test-file
+```
+Numeric mode example
+ ```
+ $ chmod 777 test-file
+ $ chmod 555 test-file
+ $ chmod 660 test-file
+ $ chmod 750 test-file
+```
 
+Change ownership and group  - chown owner:group file
+```
+$ chown bob:developer test-file
+$ chown bob andoid.pak
+$ chgrp androd. test-file
+```
