@@ -597,6 +597,7 @@ seconde three charactars is for Group - g
 Third three characters is for Other - o  
   
 File Permissions  
+  
 Bit | Purpose | Octal Value
 --- | ------- | ------------
  r | Read | 4
@@ -604,6 +605,7 @@ Bit | Purpose | Octal Value
  x | Execute | 1  
   
 Directory Permissions  
+  
 Bit | Purpose | Octal Value
 --- | ------- | ------------
  r | Read | 4
@@ -616,7 +618,8 @@ Permissions first check owner if owner then only owner permissions applied
 Next check group permission if not owner, but member of group then group permissions apply  
 Finally check other permission
   
-File Permission Example
+File Permission Example  
+  
 Example 1 | Example 2 | Example 3 | Example 4
 --------- | --------- | --------- | ---------
 rwx | rw- | -wx | r-x
