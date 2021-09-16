@@ -577,5 +577,32 @@ $ grep -i pslucas /etc/group
 NAME:PASSWORD:GID:MEMBERS
 Group name, password set to x saved in the shadow file, Group ID, memeber list comma separated
  
+#### Linux File Permissions  
+  
+Use ls -l command to get information about file type and permissions  
+  
+File Type | Identifier
+--------- | ----------
+Directory | d
+Regular File | -
+Character Devicd | c
+Link | l
+Socket File | s
+Pipe | p
+Block device | b  
+ 
+File permission example  -rwxrwxr-x
+first three characters is for User - u  
+seconde three charactars is for Group - g  
+Third three characters is for Other - o  
+  
+Bit | Purpose | Octal Value
+--- | ------- | ------------
+ r | Read | 4
+ w | Write | 2
+ x | Execute | 1  
+  
 
+  
+  
 
