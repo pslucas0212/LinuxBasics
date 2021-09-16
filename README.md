@@ -435,5 +435,43 @@ $ echo $SHELL | tee -a shell.txt
 ```
   
 #### VI editor
+Most popular text editor used with Linux
+
+- open a file
+```
+ $ vi sample.txt
+```
+
+- Three operation modes in VI
+  - Command
+  - Instert
+  - Last line
+  
+- Switch from command line mode to insert mode type i
+- Switch to command line hit Esc key
+- Switch to last line mode type :
+- Switch to command mode hit esc key
+  
+Command Mode
+- copy, cut, past, insert text
+- use arrow keys or hjkl to navigate key
+- copy line type yy
+- paste use p
+- zz to save file
+- to delete charactaer, type x
+- to delete entire line type dd
+- to delete 3 lines type d3d
+- undo edit type u
+- to find text type /<text>, to move down type n to move N
+- to write insert text type i, o, a, or A  Last line wil indidcate that you are in Insert mode
+- to go to last line mode type :
+    - to save file type :w
+    - to quite type : then q
+    - to write and quite type : then wq
+ 
+VIM is VI improved - sometimes vi now points to vim.
+
+## Security and File Permissions
+
   
   
