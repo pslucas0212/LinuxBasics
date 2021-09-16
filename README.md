@@ -473,10 +473,11 @@ VIM is VI improved - sometimes vi now points to vim.
 
 ## Security and File Permissions
 
+- Acess Controls -
 - PAM - Pluggable Authentication Modle - authenticate users to programs and services
-- Networking - secuirty applied to services usingnetworking with iptables and firewalld
+- Network security - secuirty applied to services usingnetworking with iptables and firewalld
 - SELinux - security policies to isolate services/processes running on the system
-- SSH - security login
+- SSH hardening - security login
   
 #### Linux Accounts
 - Every user on linux has a linux accoutn with user name, user id, and password to logon to the system.  Ever user has a unique user id.  Information about users is stored in the /etc/passwd file
@@ -508,3 +509,39 @@ $ su -c whoami
 Sudo is the recommended command for priveleged escalation.  To run commands as root user.  The user is prompted for their password.  Sudo users and privelees are defined in the /etc/sudoers file.    
 sudoers file
   
+#### User Management
+Managing Users:
+Commands to Add (create user) user; see user bob's uid and gid, home directory and shell; "see" bob's password setting in the /etc/shadow file, set Bob's password, check how you are logged into the system and change your password...
+```
+$ useradd bob
+$ grep -i bob /etc/passwd
+$ grep -i bob /etc/shadow
+$ passwd bob
+$ whoami
+```
+  
+Common options to use with useradd
+* -c custom comments
+* -d customer home directory
+* -e expirdy date
+* -G creat use with mutilple secondary groups
+* -s specifiy login shell
+* -u specify UID
+
+```
+$ useradd -u 1099 -g 1009 -d /home/robert -s /bin/bash -c "Mercury Project Member" bob
+$ id bob
+$ grep -i bob /etc/passwd
+```
+Delete user  
+```
+  $ userdel bob
+```
+Create group
+```
+$ groupadd -g 1011 developer
+```
+Delete group
+```
+$ groupdel developer
+```
