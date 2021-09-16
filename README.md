@@ -499,7 +499,12 @@ User account type refers to individual users that need access to Linux serves
 ```
 $ who
 ```
-                          
- 
-  
+#### Switch users
+You can use the su command to switch to root or another user, but this is not recommended as you need the password of the user you are switching to
+```
+$ su -
+$ su -c whoami
+```
+Sudo is the recommended command for priveleged escalation.  To run commands as root user.  The user is prompted for their password.  Sudo users and privelees are defined in the /etc/sudoers file.    
+sudoers file
   
