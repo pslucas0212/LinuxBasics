@@ -596,13 +596,30 @@ first three characters is for User - u
 seconde three charactars is for Group - g  
 Third three characters is for Other - o  
   
+File Permissions  
 Bit | Purpose | Octal Value
 --- | ------- | ------------
  r | Read | 4
  w | Write | 2
  x | Execute | 1  
   
-
+Directory Permissions  
+Bit | Purpose | Octal Value
+--- | ------- | ------------
+ r | Read | 4
+ w | Write | 2
+ x | Execute | 1
+- | No Permission | 0  
   
+Directory permission heirachy  
+Permissions first check owner if owner then only owner permissions applied  
+Next check group permission if not owner, but member of group then group permissions apply  
+Finally check other permission
   
+File Permission Example
+Example 1 | Example 2 | Example 3 | Example 4
+--------- | --------- | --------- | ---------
+rwx | rw- | -wx | r-x
+4+2+1 | 4+2+0 | 0+2+1 | 4+0+1
+7 | 6 | 3 | 5
 
