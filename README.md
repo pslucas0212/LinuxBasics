@@ -473,5 +473,33 @@ VIM is VI improved - sometimes vi now points to vim.
 
 ## Security and File Permissions
 
+- PAM - Pluggable Authentication Modle - authenticate users to programs and services
+- Networking - secuirty applied to services usingnetworking with iptables and firewalld
+- SELinux - security policies to isolate services/processes running on the system
+- SSH - security login
+  
+#### Linux Accounts
+- Every user on linux has a linux accoutn with user name, user id, and password to logon to the system.  Ever user has a unique user id.  Information about users is stored in the /etc/passwd file
+- Group is a collection of users that have a common need for accessing particular Linux resources.  Information about groups is stored in the /etc/group file.  Each group have a unique id called the gid
+  
+- Each user has a username, unique id - UID and belongs to a group with a group id - GID.  Run the following information to get user information:
+```
+$ id <username>
+$ grep <username> /etc/passwd
+  ```
+- we can see see the users home director and shell by grepping on their name in the /etc/passwd file
+  
+User account type refers to individual users that need access to Linux serves
+
+- Superuser account has a uid = 0 and has complet control over the linux system
+- System accounts - UID <100 or between 500 - 1000
+- Service account - run nginx, etc.
+                            
+- Run who command to see who is logged in and the last time the system was rebooted
+```
+$ who
+```
+                          
+ 
   
   
