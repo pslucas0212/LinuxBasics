@@ -666,8 +666,10 @@ You can enable the passwordlesss login with keys - public and private key
 Setting up password-less SSH example:  
 1. Create key-pair
 ```
-$ ssh-keygen -i rsa
+$ ssh-keygen -t rsa
 ```
+You can except the defaults or provide custoem information  
+ 
 Notice where the keys are stored:  
 Public key - /home/bob/.ssh/id_rsa.pub  
 Private key - /home/bob/.ssh/id_rsa
