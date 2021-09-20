@@ -973,11 +973,128 @@ Block Storage | File storage | Block Storage
 Fast and Reliable | Reasonably Fast and Reliable | Fast, secure and reliable
 Dedicated to single host | Shared Storage | Highly Available
 Ideal for small Businesses | Mid/Large Business | Enterprise Storage
-    | Not suitable for OS |                                
-                           
+Suitable for OS | Not suitable for OS | Not suitable for OS
+  
+ #### NFS File System  
+ Saves data in form of files in client/server model.  NFS Server has /software/repos is shared across the network via a mount.  Sharing disk in NFS is called exporting.  
+  
+NFS server maintains exports file at /etc/exprots that maintains a list of servers that can access the folder
+```
+/software/repos hosta hostb hostc
+```
+Specific ports may have to be opened for NFS to work
+```
+$ exportsfs -a
+$ exportsfs -o 10.16.13.201:/software/repos
+```
+On the server mount the drive with:
+```
+$ mount 10.16.13.201:/software/repos /mnt/software/repos
+```
+  
+#### LVM
+Logical Volume Manager allows grouping of multiple physcial drives into one volume group where you can then carve out logical volumes.   This allows logical volumes to be easily resized.  
+   
+ 
+Install LVM
+```
+$ apt-get install lvm2
+$ pvcreate /dev/sdb
+$ vgcreate caleston_vg /dev/sdb
+$ pvdisplay
+$ vgdisplay
+$ lvcreate -L 1G -n vol1 caleston_vg
+$ lvdisplay
+$ lvs
+$ mkfs.ext4 /dev/caleston_vg/vol1
+$ mount -t ext4 /dev/caleston_vg/vol1 /mnt/vol1
+```
+Resize volumen - first see if there is enough size
+```
+$ vgs
+$ lvresize -L +1G /dev/caleston_vg/vol1
+$ dfh -hP /mnt/vol1
+```
+Resize file system size
+```
+$ resize2fs /dev/caleston_vg/vol1
+$ df -hP /mnt/vol1
+```
+
+  
+## Service Management with SYSTEM
+Specs for the Service - start with all these conditions
+- Program - /user/bin/project-mercury.sh - ExecStart= /bin/bas /user/bin/project-mercury.sh
+- start Python application after Postgress DB is started - After=postgresql.service
+- User Service account project_mercury - User=project_mercury
+- auto restart on failure - Restart=on-failure
+- Restart interval 10 seconds - RestartSec=10
+- Log service events - automatically logged
+- Load when booting into graphical mode - WantedBy graphical.target   
+  
+Build on conditions one at a time:    
+Create mercury service file under /etc/systemd/system/project-mercury.service
+```
+[Unit]
+Description=Pythong Django for Project Mercury
+Documentation=http://wiki.caleston-dev.ca/mercury
+After=postgresql.service
+[Service]
+ExecStart= /bin/bash /user/bin/project-mercury.sh
+User=project_mercury
+Restart=on-failure
+RestartSec=10
+[Install]
+WantedBy graphical.target
+```
+  
+To run type:
+```
+$ systemctl start project-mercury.service
+$ systemctl status project-mercury.service
+$ systmectl stop porject-mercury.service
+$ systemctl restart project-mercury.service
+$ systemctl reloaddameon
+
+   
+  
+#### SYSTEMD Tools
+Two major tools are systemctl and jorunalctl
+  
+sytemctl can 
+- manage system state
+- start, stop, restart, reload
+- enable/disable
+- list and manage units
+- list and update targets
+  
                              
                              
-                             
+systemctl commands
+```
+$ systemctl start docker
+$ systemctl stop docker
+$ systemctl reastart docker
+$ systemctl reload docker
+$ systemctl enable docker
+$ systemctl disable docker
+$ systemctl status docker
+$ systemctl daemon-reload
+$ systecmctl edit project-mercury.service --full
+```
+Manage state
+```
+$ systemctl get-default
+$ systemctl set-default mutli-user.target
+$ systemctl list-units --all
+```
+  
+journalctl - checks journal or log enteries
+```
+$ journalctl
+$ journalctl -b
+$ journalctl -u docker.service
+```
                          
                              
                          
