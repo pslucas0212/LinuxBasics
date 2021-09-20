@@ -732,7 +732,7 @@ Additional comment:
 Second rule to drop all other IP address:  
 ```
 $ iptables -A INPUT -p tcp --dport 22 -j drop
-``
+```
 This rule will be added as the next rule to the iptable and the iptable rules are read from "Top to Botton"  When a rule is met, the remaing rules are skipped.  
                              
 Additional rules for the example:
