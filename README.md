@@ -830,6 +830,134 @@ Other look up options:
 - nslookup - doesnt look at /etc/hsts
 - dig 
   
+  
+#### Switching and Routing
+How does server a reach server b.  We need a switch and an interface on both systems.  
+```
+$ ip link
+```
+Assign ip address to computer:  
+```
+$ ip addre add 192.168.1.10/24 dev eth0
+```
+ 
+Say wwe have another network with server c and server d, with a subnet 192.168.2.0 how do we reach the other network.  We use an intelligent (computer like device) called a router.  We connect the two networks via the router: 192.168.1.1 and 192.168.2.1.  We configure a gateway to route between the networks.   
+  
+Run route command to see routing options for your Linux machine
+```
+$ route
+```
+To add a route:
+```
+$ ip route add 192.168.2.0/24 via 192.168.1.1
+```
+For any network where you want an unknown ip address sent use the default router setting:
+```
+$ ip route add default via 192.168.1.1
+```
+You could also 0.0.0.0 in the gateway field.  However if you have a public and private internet you will need a second router and gateway "link"
+
+To persist ip link, ip addr, ip addr, add these to the network interface file.
+  
+  
+ #### Network Troubleshooting
+ - time out error
+    - run $ ip link to make sure interface link is up
+    - Check to resolve that hostname is resolving - $ nslookup <server hostname>
+    - Ping remote server - $ ping <host-name> - not the best tool to check connectivity as some devices may have it disabled
+    - Run traceroute command to troubleshoot the routing - $ traceroute 192.168.2.5
+    - On the server you can if a process is running on a particular port like port 80 - $ netstat -an | grep 80 | grep -i LISTEN
+    - If web server for example is running try running the ip link command on the server
+    - Bring link up with - $ ip link set dev <interface name> up
+  
+
+## Storage in Linux  
+  
+#### Disk Partitions
+Basic Concepts like block devices  
+Block device is a type of file that can be found under the /dev direction and represents a spinning disk or SSD. It is a called block storage cause data is written in blocks or "chunks" of data  
+  
+To see block storage run:
+```
+$ lsblk
+$ ls -l /dev/ | grep "^b"
+```
+Each block device has a major and minor number.  The first number reprsent block device type and the second number identifies the whole disk and partitions created  
+Major Number | Device Type
+------------ | -----------
+1 | RAM
+3 | Hard Disk or CD ROM
+6 | Parallel Printers
+8 | SCSI DISK
+
+The diks is broken down into smaller parts of the disk.  Partition segments space for use of a particular purpose.  You don't have to partition a disk.  You can use it as is.  But partitioning makes the disk more usable.  
+  
+Partition information can be foudn with the fdisk command
+```
+$ sudo fdisk -l /dev/sda
+```  
+There are three types of disk partitions
+- Primary
+- Extended
+- Logical partition
+  
+Primary partition used to boot the system.  There is a limit 4 primary partition.   
+  
+Extend partitions host logical partitions - 1 or more.  Extended partition is like a disk drive with its own partitions.  
+
+Partition table or partitioning scheme defines how a disk is partioned.  We see the traditional MBR partition - Master Boot Record which has been around for over 30 years.  Only 4 primary partitions in MBR and maximum size 2 TB.  If we want more partitions we would use a extended partition and carve out logical partions.   
+  
+GPT is another partition scheme and stands for GUID Partition Table.  A more recent partitioning scheme to address MBR limitations.  GPT allows unlimted number of partitions and no max sizer per partiion.   
+
+Creating partitions
+```
+$ lsblk
+```
+If you see a non-partitioned disk run gdisk to partition.  gdisk will is menu driven.  Use $ gdisk ? to see options.   
+  
+Once your disk is partioned run:
+```
+$ sudo fdisk -l /dev/sdb
+```
+#### File Systems in Linux  
+Partitioning alone do not make the disks usable.  TO write disk you must create a file system and mount to a direct to read and write data to the partition.   
+EXT2 | EXT3 | EXT4
+---- | ---- | ----
+2 TB File Size | 2 TB File Size | 16 TB File Size
+4 TB Volume size | 4 TB Volume size | 1 Exabyte
+supports compression | Uses Journal | Uses Journal
+Support Linux permissions | Backwards Compatible | Backwards Compatible
+Long crash Recovery | Faster Crash Recovery | Uses chsksum for Journal
+  
+Creating file systems:
+```
+$ mkfs.ext4 /dev/sdb1
+$ mkdir /mnt/ext4;
+$ mount /dev/sdb1 /mnt/ext4
+$ mount | grep /dev/sdb1
+$ df -hP | grep /dev/sdb1
+```
+To make permanent after reboot after entry to /etc/fstab
+Field | Purpose
+----- | ------
+Filesystem | Such as /dev/vdb1 to be mounted
+Mountpoint | Directory to be mounted on
+Type | Example ext2, ext3, ext4
+Options | Such as RW or RO
+Dump | 0=ignore, 1=backup
+Pass | 0=ignore, 1 or 2 = FSCK filesystem check enforced
+  
+Add to file:
+```
+#<file system> <mount point>    <type>           <options>                              <dump>           <pass>
+/dev/sda1      /                ext4             defaults,relatime,errors=panic            0               1 ~
+```
+or
+```
+echo "/dev/sdb1  /mnt/ext4   ext4 rw 0 0" >> /etc/fstab
+```
+    
+ 
 
 
                              
