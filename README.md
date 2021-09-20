@@ -750,7 +750,94 @@ $ iptables -A OUTPUT -p -tcp -d 172.16.238.15 -dport 80 -j ACCEPT
 $ iptables -A OUTPUT -p -tcp -dport 80 -j DROP  
 $ iptables -A OUTPUT -p -tcp -dport 443 -j DROP     
 $ iptables -A INPUT -p -tcp -s 172.16.238.187 -dport 80 -j ACCEPT
-```                             
+```                               
+                             
+Use -i option to insert a rule at the top fo the chain
+```
+$ iptables -I OUTPUT -p tcp -d 172.16.238.100 --dport 443 -j Accept
+```
+                             
+To delete a rule use the -D for delet and the rule line number:
+```
+$ iptables -D OUTPUT 5
+```
+                             
+Typically to restrict access to a machine from a particular source you would create the first rule to accept the particluar server (IP address) and the second rule would be to drop all other IP addresses.  
+
+## Cronjobs
+Schedule jobs on Linux using Cron.  Use the crond service to schedule jobs on Linux.  
+                             
+To schedule a job - do not use sudo to scehdule job because the job will be scheduled to run with suod - this opens contrab in VI:
+```
+crontab -e
+``` 
+Scheudle job example in the job config file  
+```
+# m h  dom mon dow  command                             
+  0 21 *   *   *    uptime >> /tmp/system-report.txt
+```  
+To schedule job to run 8:10 AM 19th February:
+```
+10 8 19 2 *
+```
+* indicates run the particluar field all the time.  Everyminute, every hour, day, month, every weekday  
+  
+If you want something to run every other minute, day, ext. use */2 in the appropriate field  
+  
+To list all jobs scheduled in cron run:
+```
+$ crontbab -l
+```
+List crontab log file
+```
+$ cat /tmp/system-report.txt
+```
+  
+## Networking
+#### DNS overview  
+You can add hostname and ip address to the /etc/hosts file.  This is the source of truth for the host where this configed.  The destination system may have a different name.  This is known as host resolution.  You can ping, but ping maybe disabled on the target system, so consider using nslookup or dig.  
+  
+hosts file is ok for a small network.  It's easier to move all the hostnames and ip addressess to a DNS server and point all servers to a DNS server for name resolution.   
+  
+Every system has a dns hostname file to resolve the DNS location in the /etc/resolv.conf file.  Add 'nameserver 192.168.1.100' to the /etc/resolve.conf file.    
+
+If you add information to the /ect/hosts file, the system looks for hostname resolution there and then the DNS server.    
+  
+You can change the order can be modified modifying the /etc/nsswitch.conf  
+  
+What if you ping an address not in the /etc/hosts or DNS server.  You can add a second (multiple) name servers in the /etc/hosts file and your system will look there if the systems are not listed in /etc/hosts or your DNS server.
+ 
+##### Domain names  
+.com .net .edu .org .io define the domain "purpose"  
+  
+Root -> . ; .com -> top level domain ; subdomaind -> www or maps or mail    
+  
+When asking for resolution, your system first goes to internal DNS.  If not found there then you are forwarded to an external DNS server and it is was forwared to different DNS serviers until the domain is resolved.   
+
+Enable shortcut in /etc/resolv.conf
+```
+nameserver   192.168.1.100
+search       mycompany.com prod.mycompmy.com
+```
+  
+DNS Record Types   
+How records are stored in DNS:  
+A record types map hostname to an ip addresses 
+AAAA record types map hostname to ipv6 addresses
+CNAME Record types maps one hostname to another  hostname  - name to name mapping   
+
+Other look up options:  
+- nslookup - doesnt look at /etc/hsts
+- dig 
+  
+
+
+                             
+                           
+                             
+                             
+                             
+                         
                              
                          
                           
