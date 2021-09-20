@@ -725,6 +725,33 @@ Option | Description
 -j | Action to Take  
                              
                              
-                          
+Additional comment:
+- -A add or append rules
+- -s source IP address or IP addres range
+                             
+Second rule to drop all other IP address:  
+```
+$ iptables -A INPUT -p tcp --dport 22 -j drop
+``
+This rule will be added as the next rule to the iptable and the iptable rules are read from "Top to Botton"  When a rule is met, the remaing rules are skipped.  
+                             
+Additional rules for the example:
+Source/Destination | Action
+------------------ | ------
+devdb01 | Allow outgoint connectiop to port 5432
+caleston-repo-01 | Allow outgoing connection to port 80
+Internet | Drop all outgoing connections, Port 80/443
+Caleston-lp10 | Allow incoming on port 80  
+
+Rules example:
+```
+$ iptables -A OUTPUT -p -tcp -d 172.16.238.11 -dport 5432 -j ACCEPT    
+$ iptables -A OUTPUT -p -tcp -d 172.16.238.15 -dport 80 -j ACCEPT     
+$ iptables -A OUTPUT -p -tcp -dport 80 -j DROP  
+$ iptables -A OUTPUT -p -tcp -dport 443 -j DROP     
+$ iptables -A INPUT -p -tcp -s 172.16.238.187 -dport 80 -j ACCEPT
+```                             
+                             
+                         
                           
 
