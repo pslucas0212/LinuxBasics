@@ -883,6 +883,7 @@ $ lsblk
 $ ls -l /dev/ | grep "^b"
 ```
 Each block device has a major and minor number.  The first number reprsent block device type and the second number identifies the whole disk and partitions created  
+  
 Major Number | Device Type
 ------------ | -----------
 1 | RAM
@@ -920,7 +921,8 @@ Once your disk is partioned run:
 $ sudo fdisk -l /dev/sdb
 ```
 #### File Systems in Linux  
-Partitioning alone do not make the disks usable.  TO write disk you must create a file system and mount to a direct to read and write data to the partition.   
+Partitioning alone do not make the disks usable.  TO write disk you must create a file system and mount to a direct to read and write data to the partition.  
+  
 EXT2 | EXT3 | EXT4
 ---- | ---- | ----
 2 TB File Size | 2 TB File Size | 16 TB File Size
@@ -937,9 +939,10 @@ $ mount /dev/sdb1 /mnt/ext4
 $ mount | grep /dev/sdb1
 $ df -hP | grep /dev/sdb1
 ```
-To make permanent after reboot after entry to /etc/fstab
+To make permanent after reboot after entry to /etc/fstab:  
+  
 Field | Purpose
------ | ------
+----- | -------
 Filesystem | Such as /dev/vdb1 to be mounted
 Mountpoint | Directory to be mounted on
 Type | Example ext2, ext3, ext4
