@@ -690,4 +690,41 @@ Copy directory and preserve permissions example
 ```
 $ scp -pr /home/bob/media /devapp01:/home/bob
 ```
+  
+#### IP Tables
+SSH & SCP - remotely access and securly copy remote servers.  To connect to remote server you need to have user base and ssh based authentication along wiht Port 22 open.  
+  
+Apply network security enterprse wide by using Cisco ASA, Juniper NFGW, Barracuda NGFS, and Fortinet.  Alternatively apply these at a server level using firewalld and iptables on Linux and firewalls on Windows.   
+
+Example: client/laptop 172.16.238.187 with App server 172.16.238.10 and db server on 172.16.238.11 and software repo server 172.16.238.15.  Block Internet.
+  
+SSH to dev server.  To filter traffic we will use iptables.  On Ubuntu you may need to install iptables.  
+To install ip tables on ubuntu and check default rules configured on the system:
+ ```
+ $ sudo apt install iptables
+ $ sudo aiptables -L 
+ ```
+We will see three set of rules or chains: input, forward, and output.  
+- Input - traffic coming into the servier
+- Output - traffice leaving the server to connect to other server
+- Forward - Forward traffic to other servers in the network.  Not commonly used in Linux servers  
+  
+Default rules allow all traffi into and out of the server.  Called a chain because it's a chain of rules.  Either acceppt or drop the packet based on the condition of the rule.  It looks at the conditions in the order of the chain and when a condition is matched the rule is invoked.  It continues through the chain rules until a condition is met.  
+                             
+Input rule example:
+```
+$ iptables -A INPUT -p tcp -s 172.16.238.187 ---dport 22 -j ACCEPT  
+```  
+Option | Description
+------ | -----------
+-A | Add Rule
+-p | Protocol
+-s | Source
+-d | Destination
+--dport | Destination Port
+-j | Action to Take  
+                             
+                             
+                          
+                          
 
