@@ -961,9 +961,19 @@ echo "/dev/sdb1  /mnt/ext4   ext4 rw 0 0" >> /etc/fstab
 ```
     
  
+#### DAS, NAS and SAN
+Three types of storage - DAS -> Direct Attached Storage, NAS -> Network Attached Storage, SAN -> Storage Area Network (fiber attached)  
+DAS - connects directly to the host system s
+  
 
-
-                             
+DAS | NAS | SAN
+--- | --- | ---
+Directly Attached | Network attached NFS/CIFS | Storage Area Network FC (Fibre Channel) or iSCSI
+Block Storage | File storage | Block Storage
+Fast and Reliable | Reasonably Fast and Reliable | Fast, secure and reliable
+Dedicated to single host | Shared Storage | Highly Available
+Ideal for small Businesses | Mid/Large Business | Enterprise Storage
+    | Not suitable for OS |                                
                            
                              
                              
