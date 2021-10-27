@@ -1,6 +1,8 @@
 
 # KodeKloud Linux Basics Course Notes
 
+A bunch of unedited notes from the KodeKloud Linux Basics Course.  
+
 ### Shell Commands
 - Show environment settings
 ```
