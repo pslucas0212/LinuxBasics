@@ -170,19 +170,19 @@ Identified by first letter d - directory, s - socket, b - block device, l link, 
 
 
 ### Filesystem Hierarchy
-/ - root partition
-/bin - date, cp, etc commands
-/boot
-/dev
-/etc - stores most config files
-/home
-/lib - shared libraries imported in to programs
-/media - USB drive mounted under media all external media is mount under media
-/mnt -  used to temporariy mount file systems
-/opt - install any 3rd part apps
-/tmp - store temporary data
-/usr - old systems kept home directory,  Now user space programs are kept here.  vi, browser
-/var - system rights logs and cached data to var
+/ - root partition  
+/bin - date, cp, etc commands  
+/boot  
+/dev  
+/etc - stores most config files  
+/home  
+/lib - shared libraries imported in to programs  
+/media - USB drive mounted under media all external media is mount under media  
+/mnt -  used to temporariy mount file systems  
+/opt - install any 3rd part apps  
+/tmp - store temporary data  
+/usr - old systems kept home directory,  Now user space programs are kept here.  vi, browser  
+/var - system rights logs and cached data to var  
 
 Use this command to see mounted devices
 ```
