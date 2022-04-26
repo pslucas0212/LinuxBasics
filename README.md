@@ -102,6 +102,8 @@ $ touch hello.txt
 
 - Pagers like 'more' or 'less' allow you to scroll through a file
 
+- more loads the entire file at one time.  And this may be slow if the file is large
+
 more commands | result
 --------------|-------
 Space Bar | Scrolls text one display at a time
@@ -109,6 +111,27 @@ Enger key | Scrolls one line at a time
 b key | Scrolls backwards one screen at a time
 / key | Search for text in the file
 q key | Quits more
+
+- Use the 'ls' command to list directoy.  Use 'ls -l' long list option to list additonal information like access mode, ownership, last access time, etc'
+```
+$ ls -l
+```
+
+- Use -a to get hidden directory information.
+```
+$ ls -a
+$ ls -al
+```
+
+- To see fils in order of creation date
+```
+$ ls -lt
+```
+- To see files create in reverse order date...
+``` 
+$ ls -ltr
+```
+
 
 ### Shell Commands
 
