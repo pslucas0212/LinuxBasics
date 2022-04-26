@@ -148,8 +148,39 @@ $ date --help
 ```
 $ apropos date
 ```
-
+### Linux Shells
+- Bourne Shell (sh) developed in 70s for uniux
+- C Shell (csh or tcsh)
+- Korn Shell (ksh)
+- Z shell (zsh)
+- Bourn again Shell (bash)
+- All shells facilate the interaction between the user and the operating system.
+- To check the shell in use type 'echo $SHELL'
+```
+$ echo $SHELL
 ### Shell Commands
+/bin/bash
+```
+- Use 'chsh' to change the shell.  
+```
+$ chsh
+Password: 
+Changing the login shell for pslucas
+Enter the new value, or press ENTER for the default
+	Login Shell [/bin/bash]:
+```
+
+### BASH Features
+- bash will complete commands and directories with auto complietion
+- We can set short cuts with 'alias' command
+```
+$ alias dt=date
+$ dt
+Tue 26 Apr 2022 10:45:18 AM CDT
+```
+- The 'history' command shows the history of the command you used previously
+
+- Environent variables $XXXXX
 
 - Show environment settings
 ```
@@ -173,20 +204,38 @@ $ echo $PS1
 ```
 - Change shell
 ```
-$ sudo chsh -s /binsh <username>
+$ sudo chsh -s /bin/sh <username>
+
 ```
 - Show path
 ```
 $ echo $PATH
 ```
+- Check if location can be found for a program.  If it can't be found, add to the path.
+```
+$ which obs-studio
+```
+
 - Create alias
 ```
 $ alias up=uptime
 ```
+- Prompt shows information like path and user
+```
+[~]$
+```
+-  '~ = present working directory" and '$ = user prompt symbol'
 - Change prompt example - Add date between brackets, then username @ hostname working directory : $ -> [Wed Sep 15]bob@caleston-lp10:~$
 ```
 $ PS1='[\d]\u@\h:\w$'
 ```
+- Make it permanent in ~/.profile
+```
+echo 'PS1="[\d]\u@\h:\w$"' >> ~/.profile
+```
+
+- To make environment variables persistent add them to the '~/.profile or ~/.pam_enviroment' file.
+
 ### Linux Kernel
 - The kernel is the interface between applciations/processes and the underlying h/w - CPU, Memory, Storage, I/O.  The kernel manages and schedules resources
 - Kernel is responsible for 4 major tasks
