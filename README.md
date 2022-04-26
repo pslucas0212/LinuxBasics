@@ -240,28 +240,41 @@ echo 'PS1="[\d]\u@\h:\w$"' >> ~/.profile
 - The kernel is the interface between applciations/processes and the underlying h/w - CPU, Memory, Storage, I/O.  The kernel manages and schedules resources
 - Kernel is responsible for 4 major tasks
   - Memory Mangement
-  - Process managment - when can process
-  - Device Drivers
+  - Process managment - who can use the CPU when
+  - Device Drivers 
   - Systems Calls and security
-- Kernel is monolithic
-- Kernel is modular - can extend its capability by loading dynamic extenxsions
+- Kernel is monolithic - carries out the work above by itself
+- Kernel is modular - can extend its capability by loading dynamic extenxsions of the kernel																			
+- Hardware <--- Kernel Space (([Device Drivers)([kernel)) <--- System calls ---- User Space (Applications/Programs)
 
 - To kernel name type
 ```
 $ uname
+Linux
 ```
-- To see kernel version type
+- To see kernel version type 
 ```
 $ uname -r
+5.10.63-v7l+
 ```
+- <kernel version>.<Major version><Minor vers><patch release> and may include distro specif information
+	
+	
 - See the kernel.org webssite to get more information on the Linux kernel
 
 #### Kernel and User Space
+- Memory management is what of the most task of the kernel
 - memory is divided into two spaces: Kernel space and user space
-  - Kernel space unrestricted access to hardware and runs the Kernel code, kernel extensions and device drivers
-  - User space - all process running outside kernel space which restricts access to h/w
+  - Kernel space conatins the kernel (code and extensions) and hardware device drives and a process running in the kernel space has unrestricted access to hardware and runs the Kernel code, kernel extensions and device drivers
+  - User space contains application and programs - all process running outside kernel space which restricts access to h/w
     - user space applications - user space also called user land
+    - Applications get access to data and code in memory and/or on disk by making system calls to the kernel (see following examples)
+	- Opening a file 
+	- write a file
+	- list process
+	- Allocating memory by defining a variable
     - examples: programs written in Java, C, Python
+	
 
 - Data for users stored in memory or disk.  Applications in the user space access data by making system calls to the kernel space, which in turn makes calls to device drivers to the underlying physical hardware
 
@@ -269,30 +282,90 @@ $ uname -r
 - system calls include open(), close()
 
 #### Working Hardware
-- dmesg
+- When attaching a device like a USB disk to the system gerneraters a kernel event where the device driver for the USB disk is loaded into the kernel space.  The event is know as a uevent which is sent to the user device management system daemon called udev in the user space.  The udev services dynamically creates device node created on the device folder /dev/usb
+
+
+- dmesg tool get messages from the ring buffer
 ```
 $ dmesg | grep -i usb
 ```
+- udevadm ia admin tool can query the udev database
+	
+```
+$ udevadm info --query=path --name=/dev/ttyUSB0
+/devices/platform/scb/fd500000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/usb1/1-1/1-1.3/1-1.3:1.0/ttyUSB0/tty/ttyUSB0
+```
 
-udevadm info --query=path --name=dev/
+- udevadm monitor is used for monitoring udev events especially when attaching or removing devices
+```
+$ udevadm monitor
+```
 
-lspci - list info about pci devices - like network cards, video cards, etc.
+- lspci - list info about pci devices - like network cards, video cards, any device that attaches directly to the mother board via PCI.
+```
+$ lspci
+00:00.0 PCI bridge: Broadcom Limited Device 2711 (rev 10)
+01:00.0 USB controller: VIA Technologies, Inc. VL805 USB 3.0 Host Controller (rev 01)
+```
+- lsblk - list information about block devices - like physical devices.  Type disk refers to the entire disk and part refers to partion carved out of the disk.  MAJ:MIN - major min number of device driver 
+```
+$ lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+mmcblk0     179:0    0 29.8G  0 disk 
+├─mmcblk0p1 179:1    0  2.2G  0 part 
+├─mmcblk0p2 179:2    0    1K  0 part 
+├─mmcblk0p5 179:5    0   32M  0 part 
+├─mmcblk0p6 179:6    0  256M  0 part /boot
+└─mmcblk0p7 179:7    0 27.3G  0 part /
+'''
+- mmcblk0 is physical disk - p1 through p5 are resuable partitions created for the disk
+- Major:Minor - major number with associated device defines associated device drive, minor number differntiates between associated partsions
+	
+- lscpu - CPU architecture - 32-bit or 64-bit processors, number cores, type of processor, etc.
+```
+$ lscpu
+Architecture:        armv7l
+Byte Order:          Little Endian
+CPU(s):              4
+On-line CPU(s) list: 0-3
+Thread(s) per core:  1
+Core(s) per socket:  4
+Socket(s):           1
+Vendor ID:           ARM
+Model:               3
+Model name:          Cortex-A72
+Stepping:            r0p3
+CPU max MHz:         1500.0000
+CPU min MHz:         600.0000
+BogoMIPS:            108.00
+Flags:               half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32
+```
 
-lsblk - list information about block devices - like physical devices.  Type disk refers to the entire disk and part refers to partion carved out of the disk.  MAJ:MIN - major min number of device driver 
+- lsmem --summary - list available memory on the system
+```
+lsmem --summary
+Memory block size:       128M
+Total online memory:       4G
+Total offline memory:      0B
+```
 
-lscpu - CPU architecture - 32-bit or 64-bit processors
+- free -m - list free memory -m megabyte, -k kilobbyte, -g gb
+```
+$ free -m
+              total        used        free      shared  buff/cache   available
+Mem:           3735         797        1823          18        1114        2670
+Swap:          4055           0        4055
+```
 
-lsmem --summary - list memory on system
-
-free -m - list free memory -m megabyte, -k kilobbyte
-
-lshw - hardware output
+- lshw - extract detail information on the hardware
 
 #### sudo
+
 - run command as root - with sudo you can determine which commands a user can run as super user and also see a list of commands the user has run as root
 ```
 $ sudo lshw
 ```
+- With sudo you can control who can run commands as root, which commands/programs that can be run, and replay commands the user has run as sudo
 
 ## Linux Boot Sequence
 - Four stages
