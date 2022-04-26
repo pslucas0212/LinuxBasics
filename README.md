@@ -317,7 +317,7 @@ mmcblk0     179:0    0 29.8G  0 disk
 ├─mmcblk0p5 179:5    0   32M  0 part 
 ├─mmcblk0p6 179:6    0  256M  0 part /boot
 └─mmcblk0p7 179:7    0 27.3G  0 part /
-'''
+```
 - mmcblk0 is physical disk - p1 through p5 are resuable partitions created for the disk
 - Major:Minor - major number with associated device defines associated device drive, minor number differntiates between associated partsions
 	
