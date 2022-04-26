@@ -4,6 +4,31 @@
 A bunch of unedited notes from the KodeKloud Linux Basics Course.  
 
 ### Shell Commands
+The inux shell is a prorgam interface between the user and computer.  When you login you are taken to computer generated directory known as the home directory.  Located under:
+```
+/home/<user name>
+```
+The home directory is denoted by a ~ symbol.  The ~ represents the home directory
+
+- On the command line you enter a command like the "echo" command.  Commands take arguements.  The echo command takes a string text as an argument
+```
+$ echo 'Hello World!;
+```
+- Some commands do not need an argument like the "uptime" command which shows how long the system has been running
+- Some commands take a switch or a flag modify the command
+```
+$ echo -n 'Hello world'
+```
+
+- Commands are categorized as two types: internal or build in commands (about 35) and external commands that rely on a progam
+- 'cd' - change direcotry is an example of a built in command
+
+Internal command | What it does
+-----------------|-------------
+cd | change directory
+mkdir | make a directory
+pwd | print working directory
+
 - Show environment settings
 ```
 $ env
@@ -12,7 +37,7 @@ $ env
 ```
 $ export NAME=paul
 ```
-- Add to Path
+- Add to Path to path environment variable
 ```
 $ export $PATH:/somedir
 ```
