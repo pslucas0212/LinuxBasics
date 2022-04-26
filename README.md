@@ -247,7 +247,7 @@ echo 'PS1="[\d]\u@\h:\w$"' >> ~/.profile
 - Kernel is modular - can extend its capability by loading dynamic extenxsions of the kernel																			
 - Hardware <--- Kernel Space (([Device Drivers)([kernel)) <--- System calls ---- User Space (Applications/Programs)
 
-- To kernel name type
+- To see kernel name type
 ```
 $ uname
 Linux
@@ -257,7 +257,7 @@ Linux
 $ uname -r
 5.10.63-v7l+
 ```
-- <kernel version>.<Major version><Minor vers><patch release> and may include distro specif information
+- '<kernel version>.<Major version><Minor vers><patch release>' and may include distro specif information
 	
 	
 - See the kernel.org webssite to get more information on the Linux kernel
