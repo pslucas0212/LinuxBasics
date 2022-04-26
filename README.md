@@ -131,7 +131,23 @@ $ ls -lt
 ``` 
 $ ls -ltr
 ```
-
+### Command Line Help
+ - The 'whatis' command provides a one line descprtion of a command.
+```
+$ whatis date
+```
+- Use man (manual) pages to get a detailed description of a command along with usage examples.
+```
+$ man date
+```
+- Most commands have buit-in help use the '--help' option with the command
+```
+$ date --help
+```
+- Use 'apropos' along with the command as the argument to find all man page with references to the command
+```
+$ apropos date
+```
 
 ### Shell Commands
 
