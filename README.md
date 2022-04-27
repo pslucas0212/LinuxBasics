@@ -4,7 +4,8 @@
 A bunch of unedited notes from the KodeKloud Linux Basics Course.  
 
 ### Table of Contents
-[KodeKloud Linux Working with the Shell Part 1](https://github.com/pslucas0212/KodeKloud-Linux-Working-with-the-Shell-Part-1/blob/main/README.md)
+[KodeKloud Linux Basics: Working with the Shell Part 1](https://github.com/pslucas0212/KodeKloud-Linux-Working-with-the-Shell-Part-1/blob/main/README.md)
+[KodeKloud Linux Basics: The Linux Kernel](https://github.com/pslucas0212/KodeKloud-Linux-The-Linux-Kernel/blob/main/README.md)
 
 
 ### Linux Command line
