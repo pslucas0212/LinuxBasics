@@ -376,37 +376,41 @@ $ sudo lshw
 
 There are two Ways to Start a linux device in stopped or halted state or reboot running system
 
-BIOS POST has nothing to do with Linux. The power on self test (POST - make sure all devices attached the systme can start (checks all h/w). If there is an problem, then system will not proceed to the boot stage.    
-After a successful POST the BIOS loads and executes the boot code which is located in the first sector of harddrive.  In Linux located in /boot file system.  It loads the boot process with the boot screen tha hats optional sections.  It then loads the kernel code into memory and hands over control to the kermel
-- Grand Unified Boot Load (GRUB 2) - primary boot loader for most Linux distros
-- Kernel is decompressed after loading. Kernels in a compressed space to save memory.  It then initialized h/w and setups memoty - the kernel is loaded into memory
-  -   After kernel is loaded it looks for an init process to setup user space
-- Then the kernel lookds for an INIT process starts systemd.  It's responsible in bringing the system to a ready state.
-  -   systemd start system services, mounts drives, etc.  (System V or sysV init was the old services system).  Systemd reduces start up time since it runs services start up in parallel
-  - To check system services proces run:
+- BIOS POST has nothing to do with Linux. The power on self test (POST - make sure all devices attached the systme can start (checks all h/w). If there is an problem, then system will not proceed to the boot stage.    
+- After a successful POST the BIOS loads and executes the boot code which is located in the first sector of harddrive.  In Linux located in /boot file system.  It loads the boot process with the boot screen tha hats optional sections.  It then loads the kernel code into memory and hands over control to the kermel
+	- Grand Unified Boot Load (GRUB 2) - primary boot loader for most Linux distros
+	- Kernel is decompressed after loading. Kernels in a compressed space to save memory.  It then initialized h/w and setups memoty - the kernel is loaded into memory
+  	-   After kernel is loaded it looks for an init process to setup user space
+	- Then the kernel lookds for an INIT process starts systemd.  It's responsible in bringing the system to a ready state.
+  	-   systemd start system services, mounts drives, etc.  (System V or sysV init was the old services system).  Systemd reduces start up time since it runs services start up in parallel
+
+To see what init process is using run:
 ```
 ls -l /sbin/init
 lrwxrwxrwx 1 root root 20 Aug  6  2021 /sbin/init -> /lib/systemd/systemd
 ```
 
-To see what init process is using run:
-```
-$ ls -l /sbin/init
-```
 
 ### Run Levels
-Linux can run in multiple modes set by the run level.  Type the following to see the level
+Linux can run in multiple modes set by the run level like the graphical mode.  These are call run levels.  Type the following to see the level
 ```
 $ runlevel
+N 5
 ```
-Run levels include:
-- graphical
-- command line
+- Run levels include:
+	- Runlevel 5 is the graphical mode
+	- Runlevel 3 is the command line
 
-During boot the system checks the runlevel
+- During boot the init process checks the runlevel to make sure all systems start to run in the correct mode.  In the Graphical mode graphics service smust run 
 
-in systemd runlevel are called systemd targets
+In newer Linux distros systemd is used as the init process.  Systemd runlevels are called systemd targets.  Run level 3 and 5 are the most commonly used run target levels
 
+Runlevel | System Targets | Function
+---------|----------------|----------
+3 | graphical.target | Boots into a Graphical interface
+5 | multiuser.target | Boots into a Command Line Interface
+
+	
 To see systemd target type:
 ```
 $ systemctl get-default
