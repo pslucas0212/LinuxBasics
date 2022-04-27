@@ -372,17 +372,22 @@ $ sudo lshw
   -   BIOS Post
   -   Boot Loader - GRUB2
   -   Kernel Initialization
-  -   INIT process (systemd)
+  -   INIT process (service initalization using systemd)
 
-Start a linux device in stopped or halted state or reboot running system
+There are two Ways to Start a linux device in stopped or halted state or reboot running system
 
-BIOS POST - power on self test - make sure all the h/w can start
-BIOS loads boot code - located in first segment of harddrive - loadks kernel
-- Grand Unified Boot Load (GRUB 2)
-- Kernel is decompressed after loading - the kernel is loaded into memory
+BIOS POST has nothing to do with Linux. The power on self test (POST - make sure all devices attached the systme can start (checks all h/w). If there is an problem, then system will not proceed to the boot stage.    
+After a successful POST the BIOS loads and executes the boot code which is located in the first sector of harddrive.  In Linux located in /boot file system.  It loads the boot process with the boot screen tha hats optional sections.  It then loads the kernel code into memory and hands over control to the kermel
+- Grand Unified Boot Load (GRUB 2) - primary boot loader for most Linux distros
+- Kernel is decompressed after loading. Kernels in a compressed space to save memory.  It then initialized h/w and setups memoty - the kernel is loaded into memory
   -   After kernel is loaded it looks for an init process to setup user space
-- INIT process starts systemd
-  -   systemd start services, mounts drives, etc.
+- Then the kernel lookds for an INIT process starts systemd.  It's responsible in bringing the system to a ready state.
+  -   systemd start system services, mounts drives, etc.  (System V or sysV init was the old services system).  Systemd reduces start up time since it runs services start up in parallel
+  - To check system services proces run:
+```
+ls -l /sbin/init
+lrwxrwxrwx 1 root root 20 Aug  6  2021 /sbin/init -> /lib/systemd/systemd
+```
 
 To see what init process is using run:
 ```
