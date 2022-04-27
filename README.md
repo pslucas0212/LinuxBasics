@@ -414,13 +414,28 @@ Runlevel | System Targets | Function
 To see systemd target type:
 ```
 $ systemctl get-default
+graphical.target
 $ ls -ltr /etc/systemd/system/default.target
+lrwxrwxrwx 1 root root 36 Feb 13  2020 /etc/systemd/system/default.target -> /lib/systemd/system/graphical.target
 ```
+The command 'systemctl get-default' looks up the default.target file located in /etc/systemd/system/default.target.  You can see this has symbolic link
 
-Change systemd target:
+Change systemd target (this example changes the run level from 5 to 3):
 ```
 $ sudo systemctl set-default multi-user.target
 ```
+The term runlevels is used in the sysV init systems. These have been replaced by systemd targets in systemd based systems.
+
+sysV Runlevels | systemd Targets
+---------------|----------------
+runlevel 0 | poweroff.target
+runlevel 1 | rescue.target
+runlevel 2 | multi-user.target
+runlevel 3 | multi-user.target
+runlevel 4 | multi-user.target
+runlevel 5 | graphical.target
+runlevel 6 | reboot.target
+	
 
 ### File types
 "Everything is a file in Linux" - every object in linux is a "type" of file
