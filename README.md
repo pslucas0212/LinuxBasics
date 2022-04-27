@@ -3,6 +3,9 @@
 
 A bunch of unedited notes from the KodeKloud Linux Basics Course.  
 
+### Table of Contents
+[KodeKloud Linux Working with the Shell Part 1](https://github.com/pslucas0212/KodeKloud-Linux-Working-with-the-Shell-Part-1/blob/main/README.md)
+
 
 ### Linux Command line
 The inux shell is a prorgam interface between the user and computer.  When you login you are taken to computer generated directory known as the home directory.  Located under:
