@@ -440,25 +440,41 @@ runlevel 6 | reboot.target
 ### File types
 "Everything is a file in Linux" - every object in linux is a "type" of file
 Three types of files
-- regular files - images, scripts, configuration, shell scripts, jpeg
+- regular files - most common files containing text, images, scripts, configuration, shell scripts, jpeg
 - directory - stores other directories and files
-- special files
-  -   character files - device
-  -   Block files - under /dev - block device reads from and writes to a device in chunks of block either memory or hard disk
-  -  Links: Hard links and symbolic links
-  -  Sockets - communication between to files
-  -  Named pipes - send information bi-directionally between process
+- special files (5 types_
+  -  Character files - represent devices under /dev - mouse, keyboard
+  -  Block files - under /dev - a block device reads to from and writes to a device in chunks of block either memory or hard disk
+  -  Links: Links to data to Hard links and symbolic links (like a short cut or alias and are independent).   
+  -  Sockets - communication between two processes
+  -  Named pipes - speciaal process connection data between processes Data can flow bi-directionly
 
 
 Identify file type
-````
-$ file /home/dir
-$ file bob.sock
-````
-or use list - ls command to identify file type by the output
 ```
-ls -ld /home/michael
+$ file /home/pslucas
+/home/pslucas: directory
+$ file /home/pslucas/text.txt 
+/home/pslucas/text.txt: ASCII text
 ```
+or use the list command 'ls' command to identify file type by the output
+```
+$ ls -ld /home/pslucas/
+drwxr-xr-x 7 pslucas pslucas 4096 Apr 25 19:53 /home/pslucas/
+$ ls -ld text.txt 
+-rw-r--r-- 1 pslucas pslucas 34 Apr 25 19:54 text.txt
+```
+File Type | Identifier
+----------|-----------
+Directory | d
+Regular File | -
+Character Device | c
+Link | l
+Socket File | s
+Pipe | p
+Block Device | b
+	
+	
 Identified by first letter d - directory, s - socket, b - block device, l link, p - pip - - regular file
 
 
