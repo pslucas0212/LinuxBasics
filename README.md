@@ -7,7 +7,7 @@ A bunch of unedited notes from the KodeKloud Linux Basics Course.
 [KodeKloud Linux Basics: Working with the Shell Part 1](https://github.com/pslucas0212/KodeKloud-Linux-Working-with-the-Shell-Part-1)  
 [KodeKloud Linux Basics: Linux Core Concepts](https://github.com/pslucas0212/KodeKloud-Linux-Core-Linux-Concepts)   
 [Kode Cloud Linux Basics: Package Management](https://github.com/pslucas0212/Kode-Kloud-Linux-Package-Management)
-
+[KodeKloud Linux Basics: Working with the Shell Part 2](https://github.com/pslucas0212/KodeKloud-Linux-Working-with-the-Shell-Part-2)
 
 
 
