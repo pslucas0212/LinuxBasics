@@ -119,18 +119,48 @@ Scheudle job example in the job config file.  The first five fields define frequ
 # m h  dom mon dow  command                             
   0 21 *   *   *    uptime >> /tmp/system-report.txt
 ```  
-To schedule job to run 8:10 AM 19th February
+To schedule job to run 8:10 AM 19th February any week dat.   * means run anytime for that field,  Here it means run on any February 19th no matter the day of the week
 Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
 --------|---------|---------|---------|---------|--------
 10 | 8 | 19 | 2 | * | uptime >> /tmp/system-report.txt
 minute | hour | day | month | weekday | command
+
+To run the job at 8:10 AM on the 19th of any month
+
+Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
+--------|---------|---------|---------|---------|--------
+10 | 8 | 19 | * | * | uptime >> /tmp/system-report.txt
+minute | hour | day | month | weekday | command
+
+To run the job on every day of any month at 8:10 AM
+
+Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
+--------|---------|---------|---------|---------|--------
+10 | 8 | * | * | * | uptime >> /tmp/system-report.txt
+minute | hour | day | month | weekday | command
+
+To run the job on every day of any month at 10 minutes of every hour
+
+Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
+--------|---------|---------|---------|---------|--------
+10 | * | * | * | * | uptime >> /tmp/system-report.txt
+minute | hour | day | month | weekday | command
+
+To run every minute of every hoour of every day...
+To run the job on every day of any month at 10 minutes of every hour
+
+Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
+--------|---------|---------|---------|---------|--------
+* | * | * | * | * | uptime >> /tmp/system-report.txt
+minute | hour | day | month | weekday | command
+
+To schedule our job to run at 9 PM everyday:
 ```
-10 8 19 2 *
-```
-* indicates run the particluar field all the time.  Everyminute, every hour, day, month, every weekday  
-  
+# m h  dom mon dow  command                             
+  0 2
 If you want something to run every other minute, day, ext. use */2 in the appropriate field  
-  
+```
+
 To list all jobs scheduled in cron run:
 ```
 $ crontbab -l
@@ -138,6 +168,10 @@ $ crontbab -l
 List crontab log file
 ```
 $ cat /tmp/system-report.txt
+```
+Or check the syslog
+```
+$ tail /var/log/syslog
 ```
   
 
