@@ -151,7 +151,7 @@ To run the job on every day of any month at 10 minutes of every hour
 
 Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
 --------|---------|---------|---------|---------|--------
-* | * | * | * | * | uptime >> /tmp/system-report.txt
+'* | * | * | * | * | uptime >> /tmp/system-report.txt
 minute | hour | day | month | weekday | command
 
 To schedule our job to run at 9 PM everyday:
