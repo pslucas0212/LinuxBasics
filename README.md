@@ -122,8 +122,8 @@ Scheudle job example in the job config file.  The first five fields define frequ
 To schedule job to run 8:10 AM 19th February
 Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
 --------|---------|---------|---------|---------|--------
-10 | 8 | 19 | 2 | *
-minute | hour | day | month | weekday
+10 | 8 | 19 | 2 | * | uptime >> /tmp/system-report.txt
+minute | hour | day | month | weekday | command
 ```
 10 8 19 2 *
 ```
