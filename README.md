@@ -36,24 +36,31 @@ SSH to dev server.  To filter traffic we will use iptables.  On Ubuntu you may n
 To install ip tables on ubuntu and check default rules configured on the system:
  ```
  $ sudo apt install iptables
- $ sudo aiptables -L 
+ ```
+ List current iptable rules
+ ```
+ $ sudo iptables -L 
  ```
 We will see three set of rules or chains: input, forward, and output.  
 - Input - traffic coming into the servier
-- Output - traffice leaving the server to connect to other server
+- Output - traffic leaving the server to connect to other server
 - Forward - Forward traffic to other servers in the network.  Not commonly used in Linux servers  
   
 Default rules allow all traffi into and out of the server.  Called a chain because it's a chain of rules.  Either acceppt or drop the packet based on the condition of the rule.  It looks at the conditions in the order of the chain and when a condition is matched the rule is invoked.  It continues through the chain rules until a condition is met.  
+
+Besides the source in the chain rule we can control the target, target port and target protocol
                              
 Input rule example:
 ```
 $ iptables -A INPUT -p tcp -s 172.16.238.187 ---dport 22 -j ACCEPT  
 ```  
+Even though we just created a specific rule for 172.16.238.187, the default rule allows all incoming traffice.  Thus we have to create a second rule that drops all incoming requests to port 22.  we only want the 172.16.238.187 client to connect on port 22.
+
 Option | Description
 ------ | -----------
--A | Add Rule
+-A | Add Rule or append rule
 -p | Protocol
--s | Source
+-s | Source or ip range
 -d | Destination
 --dport | Destination Port
 -j | Action to Take  
@@ -67,7 +74,7 @@ Second rule to drop all other IP address:
 ```
 $ iptables -A INPUT -p tcp --dport 22 -j drop
 ```
-This rule will be added as the next rule to the iptable and the iptable rules are read from "Top to Botton"  When a rule is met, the remaing rules are skipped.  
+This rule will be added as the next rule to the iptable and the iptable rules are read from "Top to Botton"  When a rule is met, the remaing rules are skipped.  The sequence of the rules are important as they are executed from to bottom.
                              
 Additional rules for the example:
 Source/Destination | Action
@@ -86,31 +93,37 @@ $ iptables -A OUTPUT -p -tcp -dport 443 -j DROP
 $ iptables -A INPUT -p -tcp -s 172.16.238.187 -dport 80 -j ACCEPT
 ```                               
                              
-Use -i option to insert a rule at the top fo the chain
+Use -i option to insert a rule at the top fo the chain.  In the xample we are allow 443 trafic outgoing to the caleston web server
 ```
 $ iptables -I OUTPUT -p tcp -d 172.16.238.100 --dport 443 -j Accept
 ```
                              
-To delete a rule use the -D for delet and the rule line number:
+To delete a rule use the -D for delete and the rule line number:
 ```
 $ iptables -D OUTPUT 5
 ```
                              
 Typically to restrict access to a machine from a particular source you would create the first rule to accept the particluar server (IP address) and the second rule would be to drop all other IP addresses.  
 
+Empheral port range - 32768 - 60999
+
 ## Cronjobs
-Schedule jobs on Linux using Cron.  Use the crond service to schedule jobs on Linux.  
+Schedule jobs on Linux using Cron.  Use the crond service to schedule jobs on Linux.  User can specify time date and fequency of running a job
                              
-To schedule a job - do not use sudo to scehdule job because the job will be scheduled to run with suod - this opens contrab in VI:
+To schedule a job in the user you want to run the job, run the crontab -e command. -- do not use sudo to scehdule job because the job will be scheduled to run with suod - this opens contrab in VI:
 ```
-crontab -e
+$crontab -e
 ``` 
-Scheudle job example in the job config file  
+Scheudle job example in the job config file.  The first five fields define frequency of the job.  Sixth field defines the command
 ```
 # m h  dom mon dow  command                             
   0 21 *   *   *    uptime >> /tmp/system-report.txt
 ```  
-To schedule job to run 8:10 AM 19th February:
+To schedule job to run 8:10 AM 19th February
+Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6
+--------|---------|---------|---------|---------|--------
+10 | 8 | 19 | 2 | *
+minute | hour | day | month | weekday
 ```
 10 8 19 2 *
 ```
