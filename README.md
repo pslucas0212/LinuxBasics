@@ -158,8 +158,10 @@ To schedule our job to run at 9 PM everyday:
 ```
 # m h  dom mon dow  command                             
   0 2
-If you want something to run every other minute, day, ext. use */2 in the appropriate field  
 ```
+
+If you want something to run every other minute, day, ext. use */2 in the appropriate field  
+
 
 To list all jobs scheduled in cron run:
 ```
